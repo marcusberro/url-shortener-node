@@ -13,7 +13,7 @@
   "author": "Marcus Berro",
   "license": "MIT",
   "dependencies": {
+    "mongodb": "^2.1.19",
     "restify": "^4.0.4"
   }
-
 }
