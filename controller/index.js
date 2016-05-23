@@ -1,8 +1,10 @@
 'use strict';
 
-var shortenController = require('./shorten-controller');
+var ShortenController = require('./shorten-controller').ShortenController;
 
-module.exports = (server) => {
+module.exports = (server, db) => {
+  var shortenController = new ShortenController(db);
+
   server.get('/', (req, res) => {
       res.send(200, 'Main page');
   });
