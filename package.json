@@ -4,6 +4,8 @@
   "description": "URL Shortener app written in Node.js",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,5 +17,8 @@
   "dependencies": {
     "mongodb": "^2.1.19",
     "restify": "^4.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
   }
 }

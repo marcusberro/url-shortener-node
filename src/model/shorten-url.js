@@ -7,7 +7,6 @@ module.exports.ShortenUrlDAO = function(db) {
   this.getByCode = function(code, callback){
     shortenUrls.findOne({'code': code}, function(err, url) {
         if (err) return callback(err, null);
-
         callback(err, url);
     });
   };
