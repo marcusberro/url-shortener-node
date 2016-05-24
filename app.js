@@ -8,10 +8,11 @@ var server = restify.createServer({
     version: '0.0.1'
 });
 
+require('./middleware')(server);
+
 MongoClient.connect('mongodb://localhost:27017/url-shortener', function(err, db) {
   if(err) throw err;
-
-  require('./middleware')(server);
+  
   require('./controller')(server, db);
 
   server.listen(process.env.PORT || 9999, process.env.IP || "0.0.0.0", function(){

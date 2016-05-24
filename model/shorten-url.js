@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.ShortenUrlDAO = function(db){
+module.exports.ShortenUrlDAO = function(db) {
 
   var shortenUrls = db.collection('shorten.url');
 
@@ -10,5 +10,12 @@ module.exports.ShortenUrlDAO = function(db){
 
         callback(err, url);
     });
-  }
+  };
+
+  this.saveUrl = function(shortenUrl, callback){
+    shortenUrls.insert(shortenUrl, function (err, result) {
+        if (err) return callback(err, null);
+        callback(err, result);
+    });
+  };
 }

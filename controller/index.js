@@ -1,9 +1,9 @@
 'use strict';
 
-var ShortenController = require('./shorten-controller').ShortenController;
+var ShortenerController = require('./shortener').ShortenerController;
 
 module.exports = (server, db) => {
-  var shortenController = new ShortenController(db);
+  var shortenerController = new ShortenerController(db);
 
   server.get('/', (req, res) => {
       res.send(200, 'Main page');
@@ -11,6 +11,6 @@ module.exports = (server, db) => {
   server.get('/health', (req, res) => {
       res.send(200, 'healthy');
   });
-  server.get('/:code',shortenController.redirect);
-  server.post('/',shortenController.shorten);
+  server.get('/:code', shortenerController.redirect);
+  server.post('/', shortenerController.shorten);
 };
