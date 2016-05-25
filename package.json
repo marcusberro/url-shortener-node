@@ -4,13 +4,15 @@
   "description": "URL Shortener app written in Node.js",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
+    "dev": "npm run migrate && nodemon src/app.js",
     "start": "node src/app.js",
+    "migrate": "mongo --quiet mongo-script.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "Node.js",
-    "Javascript"
+    "Javascript",
+    "MongoDB"
   ],
   "author": "Marcus Berro",
   "license": "MIT",
