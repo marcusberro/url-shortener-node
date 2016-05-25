@@ -1,10 +1,14 @@
 'use strict';
 
+var restify = require('restify');
+
 var ShortenUrlDAO = require('../model/shorten-url').ShortenUrlDAO;
+var ShortenService = require('../service/shorten-service').ShortenService;
 
 function ShortenerController(db){
 
   var shortenUrlDAO = new ShortenUrlDAO(db);
+  var shortenService = new ShortenService(db);
 
   this.redirect = function(req, res, next){
     var code = decodeURIComponent(req.params.code);
@@ -26,9 +30,10 @@ function ShortenerController(db){
     var url = decodeURIComponent(req.body);
 
     // TODO add service to build shortenURL
-    var shortenURL = {'url':url, code:'frfr'};
+    var shortenURL = {'url':url, code: 'tttt'};
 
-    shortenUrlDAO.saveUrl(shortenURL, function(err, result){
+    shortenService.shorten(url, function(err, result){
+      console.log('Controller shorten error: ', err);
       if (err) return next(new restify.errors.InternalServerError(err));
 
       console.log('Short url: ', url);
