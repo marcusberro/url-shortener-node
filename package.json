@@ -17,6 +17,7 @@
   "author": "Marcus Berro",
   "license": "MIT",
   "dependencies": {
+    "moment": "^2.13.0",
     "mongodb": "^2.1.19",
     "restify": "^4.0.4"
   },

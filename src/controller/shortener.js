@@ -10,7 +10,8 @@ function ShortenerController(db){
   this.redirect = function(req, res, next){
     var code = decodeURIComponent(req.params.code);
 
-    shortenService.redirect(code, null, function(err, redirectionUrl) {
+    console.log('request header - ', req.headers);
+    shortenService.redirect(code, req.headers, function(err, redirectionUrl) {
         if (err) return next(new restify.errors.InternalServerError(err));
 
         // TODO Get redirection url here

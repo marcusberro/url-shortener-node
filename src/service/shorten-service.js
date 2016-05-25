@@ -1,5 +1,7 @@
 'use strict';
 
+var moment = require('moment');
+
 var ShortenUrlDAO = require('../model/shorten-url').ShortenUrlDAO;
 var RedirectionDAO = require('../model/redirection').RedirectionDAO;
 var CodeService = require('./code-service').CodeService;
@@ -15,7 +17,7 @@ function ShortenService(db){
       console.log('Shorten Service error: ', err);
       if (err) return callback(err, null);
 
-      var shortenURL = {'url':url, 'seed': codeObj.seed, 'code': codeObj.code};
+      var shortenURL = {'url':url, 'seed': codeObj.seed, 'code': codeObj.code, 'creationDate': moment().format()};
 
       console.log('Calling shortenerUrlDAO...', shortenURL);
       shortenUrlDAO.saveUrl(shortenURL, function(err, result){
@@ -33,7 +35,7 @@ function ShortenService(db){
 
         console.log('Redirection: %s', shortenUrl);
 
-        var redirection = {'code': shortenUrl.code};
+        var redirection = {'code': shortenUrl.code, 'sourceInfo': sourceInfo, 'redirectDate': moment().format()};
 
         redirectionDAO.saveRedirection(redirection, function(err, result){
             if (err) return callback(err, null);
