@@ -2,23 +2,20 @@
 
 var restify = require('restify');
 
-var ShortenUrlDAO = require('../model/shorten-url').ShortenUrlDAO;
 var ShortenService = require('../service/shorten-service').ShortenService;
 
 function ShortenerController(db){
-
-  var shortenUrlDAO = new ShortenUrlDAO(db);
   var shortenService = new ShortenService(db);
 
   this.redirect = function(req, res, next){
     var code = decodeURIComponent(req.params.code);
 
-    shortenUrlDAO.getByCode(code, function(err, redirectionUrl) {
+    shortenService.redirect(code, null, function(err, redirectionUrl) {
         if (err) return next(new restify.errors.InternalServerError(err));
 
         // TODO Get redirection url here
         if(redirectionUrl)
-          res.redirect(redirectionUrl.url, next);
+          res.redirect(redirectionUrl, next);
 
         res.send(404, 'Could not find code '+code);
         return next();
@@ -28,9 +25,6 @@ function ShortenerController(db){
   this.shorten = function(req, res, next){
     // TODO check valid url
     var url = decodeURIComponent(req.body);
-
-    // TODO add service to build shortenURL
-    var shortenURL = {'url':url, code: 'tttt'};
 
     shortenService.shorten(url, function(err, result){
       console.log('Controller shorten error: ', err);
